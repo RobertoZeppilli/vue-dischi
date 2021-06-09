@@ -23,5 +23,18 @@ export default {
         width: 100%;
         z-index: 2;
         background-color: #fff;
+
+        img {
+            transition: animation .5s ease-in-out;
+            animation: scale linear .6s infinite alternate;
+        }
+    }
+    @keyframes scale {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.2);
+        }
     }
 </style>
