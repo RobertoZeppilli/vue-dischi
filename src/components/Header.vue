@@ -1,7 +1,7 @@
 <template>
   <header>
       <div class="logo">
-          <img class="ps-2" src="../assets/spotify.png" alt="Spotify Logo">
+          <img src="../assets/spotify.png" alt="Spotify Logo">
       </div>
   </header>
 </template>
@@ -25,6 +25,7 @@ export default {
         }
         img {
             height: 50px;
+            padding-left: 10px;
         }
     }
 </style>

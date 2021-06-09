@@ -7,7 +7,6 @@
 
 <script>
 import Header from "./components/Header";
-
 import DiscContainer from './components/DiscContainer';
 
 export default {

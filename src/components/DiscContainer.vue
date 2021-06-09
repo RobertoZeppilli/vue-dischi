@@ -1,10 +1,12 @@
 <template>
   <section>
-    <div class="container">
-      <div class="row">
-        <div v-for="disc in discs" :key="disc.id" class="col-6 col-md-2 col-lg-2">
-          <Disc :author="disc" />
-        </div>
+    <div class="my-container">
+      <div
+        v-for="disc in discs"
+        :key="disc.id"
+        class="disc-container"
+      >
+        <Disc :author="disc" />
       </div>
     </div>
   </section>
@@ -41,5 +43,20 @@ section {
   height: 90vh;
   padding: 40px 0;
   background-color: $primaryBg;
+
+  & > .my-container {
+    @include flex ($type: 'center');
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+    height: 100%;
+
+    & > .disc-container {
+      height: 50%;
+      width: calc(100% / 5);
+      padding: 10px;
+    }
+  }
 }
+
 </style>
