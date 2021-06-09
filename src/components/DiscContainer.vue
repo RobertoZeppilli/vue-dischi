@@ -36,7 +36,7 @@ export default {
       this.discs = response.data.response;
       setTimeout(() => {
         this.loaded = false;
-      }, 2000)
+      }, 2500)
     });
   },
 };
