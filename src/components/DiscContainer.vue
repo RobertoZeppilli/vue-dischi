@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="my-container">
+    <div class="my-container" v-if="!loaded">
       <div
         v-for="disc in discs"
         :key="disc.id"
@@ -9,27 +9,34 @@
         <Disc :author="disc" />
       </div>
     </div>
+  <Loader v-else/>
   </section>
 </template>
 
 <script>
 import Disc from "../components/Disc";
+import Loader from '../components/Loader';
 import axios from "axios";
 
 export default {
   name: "DiscContainer",
   components: {
     Disc,
+    Loader
   },
   data() {
     return {
       apiURL: "https://flynn.boolean.careers/exercises/api/array/music",
       discs: [],
+      loaded: true
     };
   },
   created() {
     axios.get(this.apiURL).then((response) => {
       this.discs = response.data.response;
+      setTimeout(() => {
+        this.loaded = false;
+      }, 2000)
     });
   },
 };
@@ -47,7 +54,7 @@ section {
   & > .my-container {
     @include flex ($type: 'center');
     flex-wrap: wrap;
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
     height: 100%;
 
