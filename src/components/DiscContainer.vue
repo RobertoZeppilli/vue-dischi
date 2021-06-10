@@ -31,7 +31,7 @@ export default {
     return {
       apiURL: "https://flynn.boolean.careers/exercises/api/array/music",
       discs: [],
-      loaded: false,
+      loaded: true,
       emptyGenre: ""
     };
   },
@@ -54,9 +54,9 @@ export default {
   created() {
     axios.get(this.apiURL).then((response) => {
       this.discs = response.data.response;
-      // setTimeout(() => {
-      //   this.loaded = false;
-      // }, 2500)
+      setTimeout(() => {
+        this.loaded = false;
+      }, 2500)
     });
   },
 };
