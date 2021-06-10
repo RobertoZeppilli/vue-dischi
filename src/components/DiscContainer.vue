@@ -1,6 +1,6 @@
 <template>
   <section>
-    <Search @selectGenre="filterGenre" />
+    <Search @selectGenre="filterGenre"/>
     <div class="my-container" v-if="!loaded">
       <div
         v-for="disc in filterSelectedGenre"
@@ -46,10 +46,10 @@ export default {
         return this.discs;
       }
       const newGenre = this.discs.filter((disc) => {
-        return disc.genre.includes(this.emptyGenre);
+        return disc.genre.includes(this.emptyGenre) || disc.author.includes(this.emptyGenre);
       });
       return newGenre;
-    },
+    }
   },
   created() {
     axios.get(this.apiURL).then((response) => {
