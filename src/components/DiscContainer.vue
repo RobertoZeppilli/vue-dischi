@@ -1,42 +1,62 @@
 <template>
   <section>
+    <Search @selectGenre="filterGenre" />
     <div class="my-container" v-if="!loaded">
       <div
-        v-for="disc in discs"
+        v-for="disc in filterSelectedGenre"
         :key="disc.id"
         class="disc-container"
       >
         <Disc :author="disc" />
       </div>
     </div>
-  <Loader v-else/>
+    <Loader v-else />
   </section>
 </template>
 
 <script>
 import Disc from "../components/Disc";
-import Loader from '../components/Loader';
+import Loader from "../components/Loader";
+import Search from "../components/Search";
 import axios from "axios";
 
 export default {
   name: "DiscContainer",
   components: {
     Disc,
-    Loader
+    Loader,
+    Search,
   },
   data() {
     return {
       apiURL: "https://flynn.boolean.careers/exercises/api/array/music",
       discs: [],
-      loaded: true
+      loaded: false,
+      emptyGenre: ""
     };
+  },
+  methods: {
+    filterGenre(selected) {
+      this.emptyGenre = selected;
+    }
+  },
+  computed: {
+    filterSelectedGenre() {
+      if (this.emptyGenre == "All") {
+        return this.discs;
+      }
+      const newGenre = this.discs.filter((disc) => {
+        return disc.genre.includes(this.emptyGenre);
+      });
+      return newGenre;
+    },
   },
   created() {
     axios.get(this.apiURL).then((response) => {
       this.discs = response.data.response;
-      setTimeout(() => {
-        this.loaded = false;
-      }, 2500)
+      // setTimeout(() => {
+      //   this.loaded = false;
+      // }, 2500)
     });
   },
 };
@@ -52,7 +72,7 @@ section {
   background-color: $primaryBg;
 
   & > .my-container {
-    @include flex ($type: 'center');
+    @include flex($type: "center");
     flex-wrap: wrap;
     max-width: 900px;
     margin: 0 auto;
@@ -65,5 +85,4 @@ section {
     }
   }
 }
-
 </style>
