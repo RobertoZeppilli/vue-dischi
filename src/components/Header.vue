@@ -4,19 +4,13 @@
       <img src="../assets/spotify.png" alt="Spotify Logo" />
     </div>
     <div class="select-container">
-      <select
-        v-model="selectGenre"
-        @change="$emit('updateData', selectGenre, selectAuthor)"
-      >
+      <select v-model="selectGenre" @change="$emit('newGenre', selectGenre)">
         <option value="">Seleziona un genere</option>
         <option v-for="(genre, index) in genres" :key="index" :value="genre">
           {{ genre }}
         </option>
       </select>
-      <select
-        v-model="selectAuthor"
-        @change="$emit('updateData', selectGenre, selectAuthor)"
-      >
+      <select v-model="selectAuthor" @change="$emit('newAuthor', selectAuthor)">
         <option value="">Seleziona un artista</option>
         <option v-for="(author, index) in authors" :key="index" :value="author">
           {{ author }}
@@ -38,6 +32,16 @@ export default {
   props: {
     genres: Array,
     authors: Array,
+    watchGenre: String,
+    watchAuthor: String,
+  },
+  watch: {
+    watchGenre: function (val) {
+      this.selectGenre = val;
+    },
+    watchAuthor: function (val) {
+      this.selectAuthor = val;
+    },
   },
 };
 </script>
@@ -67,5 +71,4 @@ header {
     }
   }
 }
-
 </style>

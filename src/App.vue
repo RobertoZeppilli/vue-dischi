@@ -3,7 +3,10 @@
     <Header
       :genres="selectedGenres"
       :authors="selectedAuthors"
-      @updateData="update"
+      @newGenre="updateGenre"
+      @newAuthor="updateAuthor"
+      :watchGenre="activeGenre"
+      :watchAuthor="activeAuthor"
     />
     <DiscContainer
       @discData="setData"
@@ -36,11 +39,15 @@ export default {
       this.selectedGenres = arrayGenres;
       this.selectedAuthors = arrayAuthors;
     },
-    update: function (genre, author) {
+    updateGenre: function (genre) {
       this.activeGenre = genre;
-  
-      this.activeAuthor = author
+      this.activeAuthor = "";
     },
+    updateAuthor: function (author) {
+      this.activeAuthor = author;
+      this.activeGenre = "";
+
+    }
   },
 };
 </script>
