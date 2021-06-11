@@ -1,12 +1,12 @@
 <template>
-  <div class="disc">
-    <div class="img-container">
-      <img :src="author.poster" :alt="author.author" />
+  <div class="disc d-flex flex-column justify-content-between text-center">
+    <div class="disc-data">
+      <img class="mb-2" :src="poster" :alt="author" />
+      <h4 class="mb-4 lead">{{ title }}</h4>
     </div>
     <div class="text-container">
-      <h4>{{ author.title }}</h4>
-      <p>{{ author.author }}</p> 
-      <p>{{ author.year }}</p> 
+      <h4 class="text-muted">{{ author }}</h4>
+      <h5 class="text-muted">{{ year }}</h5>
     </div>
   </div>
 </template>
@@ -14,39 +14,26 @@
 <script>
 export default {
   name: "Disc",
-  props: ["author"],
+  props: ["disc", "poster", "author", "title", "year"],
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../scss/variables";
-@import "../scss/mixins";
 
 .disc {
-    height: 100%;
-    padding: 20px;
-    background-color: $secondaryBg;
-    & > .img-container {
-        height: 60%;
-        @include flex ($type: 'center');
+  width: calc(100% / 5 - 1rem);
+  background-color: $secondaryBg;
+  padding: 10px;
+  margin: 0.5rem;
 
-        & > img {
-            height: 100%;
-            object-position: center;
-        }
-    }
-    .text-container {
-        margin-top: 10px;
-        text-align: center;
-        & > h4 {
-            margin-bottom: 10px;
-            color: $primaryText;
-            font-size: .9rem;
-        } 
-        & > p {
-            color: $secondaryText;
-            font-size: .7rem;
-        }
-    }
+  img {
+    width: 100%;
+  }
+  h4 {
+    color: $primaryText;
+    font-size: 1.2em;
+    font-weight: 800;
+  }
 }
 </style>
